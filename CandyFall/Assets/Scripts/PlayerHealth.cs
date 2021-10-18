@@ -6,8 +6,11 @@ using System;
 public class PlayerHealth : MonoBehaviour
 {
     public event Action OnHealthChanged;
+    public event Action OnLost;
+
     [SerializeField] private int _maxValue = 1;
     private int _value;
+
     public int Value
     {
         get
@@ -20,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
             OnHealthChanged?.Invoke();
             if(_value==0)
             {
+                OnLost?.Invoke();
                 print("Lose!");
             }
         }
