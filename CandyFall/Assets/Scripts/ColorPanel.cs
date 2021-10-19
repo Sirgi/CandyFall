@@ -5,30 +5,39 @@ using UnityEngine.UI;
 
 public class ColorPanel : MonoBehaviour
 {
-    [SerializeField] private Color[] _colors = {Color.blue,Color.green,Color.yellow,Color.red};
-    private Color _activeColor;
-    private int _activeColorIndex = 0;
+    [SerializeField] private Color[] _initialColors;
+    private static Color[] _colors; 
+    
+    private Color _currentColor;
+    private int _currentColorIndex = 0;
+
     private Image _image;
+
+    public static Color GetRandomColor()
+    {
+        return _colors[Random.Range(0,_colors.Length-1)];
+    }
 
     public Color ActiveColor
     {
         get
         {
-            return _activeColor;
+            return _currentColor;
         }
 
         private set
         {
-            _activeColor=value;
-            _image.color=_activeColor;
+            _currentColor=value;
+            _image.color=_currentColor;
         }
     }
 
     private void Awake()
     {   
+        _colors=_initialColors;
         _image=GetComponent<Image>();
-        _activeColorIndex=0;
-        ActiveColor=_colors[_activeColorIndex];
+        _currentColorIndex=0;
+        ActiveColor=_colors[_currentColorIndex];
         
     }
 
@@ -36,21 +45,21 @@ public class ColorPanel : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            _activeColorIndex--;
-            if(_activeColorIndex<0)
+            _currentColorIndex--;
+            if(_currentColorIndex<0)
             {
-                _activeColorIndex=_colors.Length-1;
+                _currentColorIndex=_colors.Length-1;
             }
-            ActiveColor=_colors[_activeColorIndex];
+            ActiveColor=_colors[_currentColorIndex];
         }
         if(Input.GetKeyDown(KeyCode.E))
         {
-            _activeColorIndex++;
-            if(_activeColorIndex>=_colors.Length)
+            _currentColorIndex++;
+            if(_currentColorIndex>=_colors.Length)
             {
-                _activeColorIndex=0;
+                _currentColorIndex=0;
             }
-            ActiveColor=_colors[_activeColorIndex];
+            ActiveColor=_colors[_currentColorIndex];
         }
     }
 

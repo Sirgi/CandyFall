@@ -5,7 +5,7 @@ using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public event Action OnHealthChanged;
+    public event Action<int> OnHealthChanged;
     public event Action OnLost;
 
     [SerializeField] private int _maxValue = 1;
@@ -20,11 +20,11 @@ public class PlayerHealth : MonoBehaviour
         set
         {
             _value=Mathf.Max(0,value);
-            OnHealthChanged?.Invoke();
+            OnHealthChanged?.Invoke(_value);
             if(_value==0)
             {
                 OnLost?.Invoke();
-                print("Lose!");
+                SceneLoader.ReloadScene();
             }
         }
     }

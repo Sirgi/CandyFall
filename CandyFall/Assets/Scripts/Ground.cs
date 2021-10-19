@@ -10,7 +10,7 @@ public class Ground : MonoBehaviour
     {
         if(collision.gameObject.tag=="Coin")
         {
-            _playerHealth.Value-=1;
+            _playerHealth.Value--;
         }
     }
 }

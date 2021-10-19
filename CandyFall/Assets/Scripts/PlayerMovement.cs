@@ -16,12 +16,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_rigidbody2D.velocity.y == 0)
-        {
-            _rigidbody2D.velocity = new Vector2(Input.GetAxis("Horizontal") * _horizontalSpeed, _rigidbody2D.velocity.y);
-        }
+        _rigidbody2D.velocity = new Vector2(Input.GetAxis("Horizontal") * _horizontalSpeed, _rigidbody2D.velocity.y);
 
-        if ((Input.GetAxis("Vertical") > 0) && (_rigidbody2D.velocity == Vector2.zero))
+        if ((Input.GetAxis("Vertical") > 0) && (_rigidbody2D.velocity.y == 0))
         {
             _rigidbody2D.velocity += Vector2.up * _jumpPower;
         }
