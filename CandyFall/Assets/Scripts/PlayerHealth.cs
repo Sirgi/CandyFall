@@ -24,7 +24,6 @@ public class PlayerHealth : MonoBehaviour
             if(_value==0)
             {
                 OnLost?.Invoke();
-                SceneLoader.ReloadScene();
             }
         }
     }

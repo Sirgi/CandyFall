@@ -8,13 +8,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _horizontalSpeed = 1f;
     [SerializeField] private float _jumpPower = 1f;
     [SerializeField] private float _fallMultiplier = 1f;
+    [SerializeField] private Results _results;
 
-    void Start()
+    private void Awake()
+    {
+        _results.OnGameEnded+=()=>Destroy(gameObject);
+    }
+
+
+    private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _rigidbody2D.velocity = new Vector2(Input.GetAxis("Horizontal") * _horizontalSpeed, _rigidbody2D.velocity.y);
 

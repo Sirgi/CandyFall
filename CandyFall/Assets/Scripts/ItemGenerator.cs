@@ -4,14 +4,36 @@ using UnityEngine;
 
 public class ItemGenerator : MonoBehaviour
 {
+    public event System.Action OnAchievedWinCounter;
+
     [SerializeField] private GameObject[] items;
     [SerializeField] private Vector2[] positions;
+    [SerializeField] private int _counter=0;
+    [SerializeField] private int _winCounter=0;
     [SerializeField] private float _time = 1f;
     private Vector2 _generatorPosition;
+    [SerializeField] private Results _results;
+
+    public int Counter
+    {
+        get
+        {
+            return _counter;
+        }
+        private set
+        {
+            _counter=value;
+            if(_counter>=_winCounter)
+            {
+                OnAchievedWinCounter?.Invoke();
+            }
+        }
+    }
 
     private void Awake()
     {
         _generatorPosition=GetComponent<Transform>().position;
+        _results.OnGameEnded+=()=>Destroy(gameObject);
     }
 
     private void Start()
