@@ -19,12 +19,17 @@ public class PlayerHealth : MonoBehaviour
         }
         set
         {
-            _value=Mathf.Max(0,value);
-            OnHealthChanged?.Invoke(_value);
-            if(_value==0)
+            value=Mathf.Max(0,value);
+            if(_value!=value)
             {
-                OnLost?.Invoke();
+                _value=value;
+                OnHealthChanged?.Invoke(_value);
+                if(_value==0)
+                {
+                    OnLost?.Invoke();
+                }
             }
+            
         }
     }
 

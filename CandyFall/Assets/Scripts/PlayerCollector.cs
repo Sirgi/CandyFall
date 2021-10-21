@@ -10,7 +10,7 @@ public class PlayerCollector : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if((collision.gameObject.tag=="Coin") && (collision.gameObject.GetComponent<SpriteRenderer>().color==_colorPanel.ActiveColor))
+        if((collision.gameObject.tag=="Coin") && (collision.gameObject.GetComponent<Coin>().ColorIndex==_colorPanel.CurrentColorIndex))
         {
             _score.Value+=1;
         }

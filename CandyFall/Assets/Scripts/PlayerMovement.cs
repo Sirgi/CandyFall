@@ -8,13 +8,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _horizontalSpeed = 1f;
     [SerializeField] private float _jumpPower = 1f;
     [SerializeField] private float _fallMultiplier = 1f;
-    [SerializeField] private Results _results;
-
-    private void Awake()
-    {
-        _results.OnGameEnded+=()=>Destroy(gameObject);
-    }
-
 
     private void Start()
     {

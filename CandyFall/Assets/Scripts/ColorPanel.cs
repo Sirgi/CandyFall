@@ -5,18 +5,13 @@ using UnityEngine.UI;
 
 public class ColorPanel : MonoBehaviour
 {
-    [SerializeField] private Color[] _initialColors;
-    private static Color[] _colors; 
+    [SerializeField] private Color[] _colors;
     
     private Color _currentColor;
     private int _currentColorIndex = 0;
+    public int CurrentColorIndex { get {return _currentColorIndex;} private set{_currentColorIndex=value;}}
 
     private Image _image;
-
-    public static Color GetRandomColor()
-    {
-        return _colors[Random.Range(0,_colors.Length-1)];
-    }
 
     public Color ActiveColor
     {
@@ -32,9 +27,10 @@ public class ColorPanel : MonoBehaviour
         }
     }
 
+    
+
     private void Awake()
     {   
-        _colors=_initialColors;
         _image=GetComponent<Image>();
         _currentColorIndex=0;
         ActiveColor=_colors[_currentColorIndex];

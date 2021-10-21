@@ -12,7 +12,6 @@ public class ItemGenerator : MonoBehaviour
     [SerializeField] private int _winCounter=0;
     [SerializeField] private float _time = 1f;
     private Vector2 _generatorPosition;
-    [SerializeField] private Results _results;
 
     public int Counter
     {
@@ -33,7 +32,6 @@ public class ItemGenerator : MonoBehaviour
     private void Awake()
     {
         _generatorPosition=GetComponent<Transform>().position;
-        _results.OnGameEnded+=()=>Destroy(gameObject);
     }
 
     private void Start()
@@ -46,6 +44,7 @@ public class ItemGenerator : MonoBehaviour
         while(true)
         {
             GenerateItem(items[Random.Range(0,items.Length)], _generatorPosition+positions[Random.Range(0,positions.Length)]);
+            Counter++;
             yield return new WaitForSecondsRealtime(_time);
         }
     }
